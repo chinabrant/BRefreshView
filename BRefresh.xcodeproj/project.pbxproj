@@ -12,6 +12,9 @@
 		54654B7A1BD78BD90067F65A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 54654B781BD78BD90067F65A /* Main.storyboard */; };
 		54654B7C1BD78BD90067F65A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 54654B7B1BD78BD90067F65A /* Assets.xcassets */; };
 		54654B7F1BD78BD90067F65A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 54654B7D1BD78BD90067F65A /* LaunchScreen.storyboard */; };
+		54654B8A1BD790480067F65A /* BBaseRefreshView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54654B891BD790480067F65A /* BBaseRefreshView.swift */; settings = {ASSET_TAGS = (); }; };
+		54654B8C1BD7A29F0067F65A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 54654B8B1BD7A29F0067F65A /* Foundation.framework */; };
+		54654B8E1BD7AE1E0067F65A /* BRefreshView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54654B8D1BD7AE1E0067F65A /* BRefreshView.swift */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +25,9 @@
 		54654B7B1BD78BD90067F65A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		54654B7E1BD78BD90067F65A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		54654B801BD78BD90067F65A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		54654B891BD790480067F65A /* BBaseRefreshView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BBaseRefreshView.swift; sourceTree = "<group>"; };
+		54654B8B1BD7A29F0067F65A /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		54654B8D1BD7AE1E0067F65A /* BRefreshView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BRefreshView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -29,6 +35,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				54654B8C1BD7A29F0067F65A /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -38,6 +45,7 @@
 		54654B681BD78BD90067F65A = {
 			isa = PBXGroup;
 			children = (
+				54654B8B1BD7A29F0067F65A /* Foundation.framework */,
 				54654B731BD78BD90067F65A /* BRefresh */,
 				54654B721BD78BD90067F65A /* Products */,
 			);
@@ -54,12 +62,22 @@
 		54654B731BD78BD90067F65A /* BRefresh */ = {
 			isa = PBXGroup;
 			children = (
+				54654B861BD78D5C0067F65A /* BRefresh */,
 				54654B741BD78BD90067F65A /* AppDelegate.swift */,
 				54654B761BD78BD90067F65A /* ViewController.swift */,
 				54654B781BD78BD90067F65A /* Main.storyboard */,
 				54654B7B1BD78BD90067F65A /* Assets.xcassets */,
 				54654B7D1BD78BD90067F65A /* LaunchScreen.storyboard */,
 				54654B801BD78BD90067F65A /* Info.plist */,
+			);
+			path = BRefresh;
+			sourceTree = "<group>";
+		};
+		54654B861BD78D5C0067F65A /* BRefresh */ = {
+			isa = PBXGroup;
+			children = (
+				54654B891BD790480067F65A /* BBaseRefreshView.swift */,
+				54654B8D1BD7AE1E0067F65A /* BRefreshView.swift */,
 			);
 			path = BRefresh;
 			sourceTree = "<group>";
@@ -135,6 +153,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				54654B771BD78BD90067F65A /* ViewController.swift in Sources */,
+				54654B8A1BD790480067F65A /* BBaseRefreshView.swift in Sources */,
+				54654B8E1BD7AE1E0067F65A /* BRefreshView.swift in Sources */,
 				54654B751BD78BD90067F65A /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -197,7 +217,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -235,7 +255,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
@@ -250,6 +270,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.brant.BRefresh;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -261,6 +282,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.brant.BRefresh;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
@@ -283,6 +305,7 @@
 				54654B851BD78BD90067F65A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
