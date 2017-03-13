@@ -8,22 +8,28 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, UITableViewDataSource {
+    
+
 
     @IBOutlet weak var tableView: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
-        let header = BRefreshView(frame: CGRectMake(0, -50, UIScreen.mainScreen().bounds.size.width, 50))
-        self.tableView.addPullToRefresh(header) { () -> Void in
-            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), { () -> Void in
-                NSThread.sleepForTimeInterval(5)
-                dispatch_async(dispatch_get_main_queue(), { () -> Void in
+        let header = BRefreshView(frame: CGRect(x: 0, y: -50, width: UIScreen.main.bounds.size.width, height: 50))
+        self.tableView.addPullToRefresh(refreshView: header) { () -> Void in
+            
+            
+            DispatchQueue.global().async {
+                Thread.sleep(forTimeInterval: 5)
+                DispatchQueue.main.async {
+                    
                     self.tableView.endRefreshing()
-                })
+                    
+                }
                 
-            })
+            }
             
         }
     }
@@ -32,8 +38,10 @@ class ViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    
 
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 30
     }
     
@@ -41,12 +49,12 @@ class ViewController: UIViewController {
     // Cell gets various attributes set automatically based on table (separators) and data source (accessory views, editing controls)
     
     @available(iOS 2.0, *)
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let Identifier = "identifier"
         
-        var cell = tableView.dequeueReusableCellWithIdentifier(Identifier)
+        var cell = tableView.dequeueReusableCell(withIdentifier: Identifier)
         if cell == nil {
-            cell = UITableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: Identifier)
+            cell = UITableViewCell(style: UITableViewCellStyle.default, reuseIdentifier: Identifier)
         }
         
         cell?.textLabel?.text = "xxx"

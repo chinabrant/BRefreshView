@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import CoreGraphics
 
-class BRefreshView: BBaseRefreshView {
+public class BRefreshView: BBaseRefreshView {
     var label: UILabel!
     var arrowView: ArrowView!
     var pieceView: PieceView!
@@ -16,12 +17,12 @@ class BRefreshView: BBaseRefreshView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        pieceView = PieceView(frame: CGRectMake(100, 10, 30, 30))
+        pieceView = PieceView(frame: CGRect(x: 100, y: 10, width: 30, height: 30))
         addSubview(pieceView)
         
-        label = UILabel(frame: CGRectMake(160, 10, 200, 30))
+        label = UILabel(frame: CGRect(x: 160, y: 10, width: 200, height: 30))
         label.text = IdleText
-        label.textColor = UIColor.orangeColor()
+        label.textColor = UIColor.orange
         self.addSubview(label)
     }
 
@@ -30,7 +31,7 @@ class BRefreshView: BBaseRefreshView {
     }
     
     override func contentOffsetChanged(newPoint: CGPoint) {
-        super.contentOffsetChanged(newPoint)
+        super.contentOffsetChanged(newPoint: newPoint)
         
         switch self.state {
         case .Refreshing:
@@ -62,35 +63,36 @@ class ArrowView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        self.backgroundColor = UIColor.clearColor()
+        self.backgroundColor = UIColor.clear
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func drawRect(rect: CGRect) {
-        super.drawRect(rect)
+    override func draw(_ rect: CGRect) {
+        super.draw(rect)
         
         // 向下的箭头
-        let context = UIGraphicsGetCurrentContext()
-        CGContextSetLineWidth(context, 2)
-        CGContextMoveToPoint(context, self.bounds.size.width / 2.0, self.bounds.size.height - 2)    // 移动画笔到下边的中点
-        CGContextAddLineToPoint(context, 0, self.bounds.size.height - ArrowHeight)
-        CGContextAddLineToPoint(context, self.bounds.size.width / 3.0, self.bounds.size.height - ArrowHeight)
-        CGContextAddLineToPoint(context, self.bounds.size.width / 3.0, 2)
-        CGContextAddLineToPoint(context, self.bounds.size.width / 3.0 * 2.0, 2)
-        CGContextAddLineToPoint(context, self.bounds.size.width / 3.0 * 2.0, self.bounds.size.height - ArrowHeight)
-        CGContextAddLineToPoint(context, self.bounds.size.width, self.bounds.size.height - ArrowHeight)
-        CGContextAddLineToPoint(context, self.bounds.size.width / 2.0, self.bounds.size.height)
-        CGContextStrokePath(context)
+        let context = UIGraphicsGetCurrentContext()!
+        context.setLineWidth(2)
+        context.move(to: CGPoint(x: self.bounds.size.width / 2.0, y: self.bounds.size.height - 2))
+        context.move(to: CGPoint(x: 0, y: self.bounds.size.height - ArrowHeight))
+        context.move(to: CGPoint(x: self.bounds.size.width / 3.0, y: self.bounds.size.height - ArrowHeight))
+        
+        context.move(to: CGPoint(x: self.bounds.size.width / 3.0, y:2))
+        context.move(to: CGPoint(x: self.bounds.size.width / 3.0 * 2.0, y:2))
+        context.move(to: CGPoint(x: self.bounds.size.width / 3.0 * 2.0, y: self.bounds.size.height - ArrowHeight))
+        context.move(to: CGPoint(x: self.bounds.size.width, y: self.bounds.size.height - ArrowHeight))
+        context.move(to: CGPoint(x: self.bounds.size.width / 2.0, y: self.bounds.size.height))
+        context.strokePath()
     }
     
     func rotate(angle: Double) {
         UIView.beginAnimations(nil, context: nil)
         UIView.setAnimationDuration(0.5)
         
-        self.transform = CGAffineTransformMakeRotation(CGFloat(angle * (M_PI / 180.0)))
+        self.transform = CGAffineTransform.init(rotationAngle:CGFloat(angle * (M_PI / 180.0)))
         UIView.commitAnimations()
     }
     
@@ -104,25 +106,25 @@ class PieceView: UIView {
     var view3: UIView = UIView()
     var view4: UIView = UIView()
     
-    let ColorGreen = UIColor.greenColor()
-    let ColorOrange = UIColor.orangeColor()
-    let ColorRed = UIColor.redColor()
-    let ColorBlue = UIColor.blueColor()
+    let ColorGreen = UIColor.green
+    let ColorOrange = UIColor.orange
+    let ColorRed = UIColor.red
+    let ColorBlue = UIColor.blue
     
-    var timer: NSTimer?
+    var timer: Timer?
     var order = 1
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        self.backgroundColor = UIColor.clearColor()
+        self.backgroundColor = UIColor.clear
         
         let width = (frame.size.width - GapWidth * 2 - CenterWidth) / 2.0
         let height = frame.size.width - GapWidth - width
         
-        view1.frame = CGRectMake(0, 0, width, height)
-        view2.frame = CGRectMake(width + GapWidth, 0, height, width)
-        view3.frame = CGRectMake(frame.size.width - width, width + GapWidth, width, height)
-        view4.frame = CGRectMake(0, height + GapWidth, height, width)
+        view1.frame = CGRect(x: 0, y: 0, width: width, height: height)
+        view2.frame = CGRect(x: width + GapWidth, y: 0, width: height, height: width)
+        view3.frame = CGRect(x: frame.size.width - width, y: width + GapWidth, width: width, height: height)
+        view4.frame = CGRect(x: 0, y: height + GapWidth, width: height, height: width)
         
         view1.backgroundColor = ColorGreen
         view2.backgroundColor = ColorOrange
@@ -139,7 +141,7 @@ class PieceView: UIView {
         if timer != nil {
             timer?.invalidate()
         }
-        timer = NSTimer.scheduledTimerWithTimeInterval(0.5, target: self, selector: "excuteAnimation", userInfo: nil, repeats: true)
+        timer = Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(excuteAnimation), userInfo: nil, repeats: true)
     }
     
     func endAnimation() {
@@ -178,8 +180,8 @@ class PieceView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func drawRect(rect: CGRect) {
-        super.drawRect(rect)
+    override func draw(_ rect: CGRect) {
+        super.draw(rect)
         
         
     }

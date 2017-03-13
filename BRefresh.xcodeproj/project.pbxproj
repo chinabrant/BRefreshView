@@ -12,9 +12,9 @@
 		54654B7A1BD78BD90067F65A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 54654B781BD78BD90067F65A /* Main.storyboard */; };
 		54654B7C1BD78BD90067F65A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 54654B7B1BD78BD90067F65A /* Assets.xcassets */; };
 		54654B7F1BD78BD90067F65A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 54654B7D1BD78BD90067F65A /* LaunchScreen.storyboard */; };
-		54654B8A1BD790480067F65A /* BBaseRefreshView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54654B891BD790480067F65A /* BBaseRefreshView.swift */; settings = {ASSET_TAGS = (); }; };
+		54654B8A1BD790480067F65A /* BBaseRefreshView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54654B891BD790480067F65A /* BBaseRefreshView.swift */; };
 		54654B8C1BD7A29F0067F65A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 54654B8B1BD7A29F0067F65A /* Foundation.framework */; };
-		54654B8E1BD7AE1E0067F65A /* BRefreshView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54654B8D1BD7AE1E0067F65A /* BRefreshView.swift */; settings = {ASSET_TAGS = (); }; };
+		54654B8E1BD7AE1E0067F65A /* BRefreshView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54654B8D1BD7AE1E0067F65A /* BRefreshView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -113,6 +113,7 @@
 				TargetAttributes = {
 					54654B701BD78BD90067F65A = {
 						CreatedOnToolsVersion = 7.0.1;
+						LastSwiftMigration = 0820;
 					};
 				};
 			};
@@ -217,7 +218,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -255,7 +256,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
@@ -270,6 +271,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.brant.BRefresh;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -282,6 +284,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.brant.BRefresh;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;

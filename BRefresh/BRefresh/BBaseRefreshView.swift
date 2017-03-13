@@ -39,21 +39,21 @@ class BBaseRefreshView: UIView {
     }
     
     func addObservers() {
-        self.scrollView?.addObserver(self, forKeyPath: "contentSize", options: NSKeyValueObservingOptions.New, context: nil)
-        self.scrollView?.addObserver(self, forKeyPath: "contentOffset", options: NSKeyValueObservingOptions.New, context: nil)
+        self.scrollView?.addObserver(self, forKeyPath: "contentSize", options: NSKeyValueObservingOptions.new, context: nil)
+        self.scrollView?.addObserver(self, forKeyPath: "contentOffset", options: NSKeyValueObservingOptions.new, context: nil)
         self.pan = self.scrollView?.panGestureRecognizer
-        self.pan?.addObserver(self, forKeyPath: "state", options: NSKeyValueObservingOptions.New, context: nil)
+        self.pan?.addObserver(self, forKeyPath: "state", options: NSKeyValueObservingOptions.new, context: nil)
     }
     
     func removeObservers() {
         self.scrollView?.removeObserver(self, forKeyPath: "contentSize")
     }
     
-    override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
+    override open func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
         if keyPath == "contentSize" {
 //            print("\n\(change)")
         } else if (keyPath == "contentOffset") {
-            contentOffsetChanged(self.scrollView!.contentOffset)
+            contentOffsetChanged(newPoint: self.scrollView!.contentOffset)
         } else if (keyPath == "state") {
 
         }
@@ -67,7 +67,7 @@ class BBaseRefreshView: UIView {
         }
         
         // 如果正在拖拽
-        if self.scrollView!.dragging {
+        if self.scrollView!.isDragging {
             // 可进入刷新
             if newPoint.y <= -refreshViewHeight {
                 self.state = .Pulling
@@ -81,8 +81,8 @@ class BBaseRefreshView: UIView {
     }
     
     func beginRefreshing() {
-        UIView.animateWithDuration(0.5) { () -> Void in
-            self.scrollView?.contentInset = UIEdgeInsetsMake(refreshViewHeight, 0, 0, 0)
+        UIView.animate(withDuration: 0.5) { () -> Void in
+            self.scrollView?.contentInset = UIEdgeInsetsMake(self.refreshViewHeight, 0, 0, 0)
         }
         
         refreshBlock()
@@ -91,7 +91,7 @@ class BBaseRefreshView: UIView {
     
     func endRefreshing() {
         self.state = .Idle
-        UIView.animateWithDuration(0.5) { () -> Void in
+        UIView.animate(withDuration: 0.5) { () -> Void in
             self.scrollView?.contentInset = UIEdgeInsetsMake(0, 0, 0, 0)
         }
         
@@ -101,7 +101,7 @@ class BBaseRefreshView: UIView {
 
 extension UIScrollView {
     
-    func addPullToRefresh(refreshView: BBaseRefreshView, refreshBlock:() -> Void) {
+    func addPullToRefresh(refreshView: BBaseRefreshView, refreshBlock:@escaping () -> Void) {
         self.addSubview(refreshView)
         refreshView.refreshBlock = refreshBlock
         refreshView.scrollView = self
